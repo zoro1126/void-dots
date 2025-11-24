@@ -1,0 +1,155 @@
+// -*- mode: jsonc -*-
+{
+    // "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 25, // Waybar height (to be removed for auto height)
+    "width": 1350, // Waybar width
+    "spacing": 4, // Gaps between modules (4px)
+    "margin-top": 10,
+
+    // Choose the order of the modules
+    "modules-left": [
+        "hyprland/workspaces",
+        "tlp",
+        "cpu",
+        "memory",
+        "battery"
+        // "playerctl"
+    ],
+    "modules-center": [
+        "idle_inhibitor",
+        "clock"
+    ],
+    "modules-right": [
+        "tray",
+        "network",
+        "pulseaudio"
+    ],
+    // Modules configuration
+    // "playerctl": {
+    //     "player": "firefox",
+    //     "format": " {artist} - {title}",
+    //     "on-click": "playerctl --player=firefox play-pause",
+    //     "on-scroll-up": "playerctl --player=firefox next",
+    //     "on-scroll-down": "playerctl --player=firefox previous",
+    //     "player_icons": {
+    //         "default": "",
+    //         "firefox": "",
+    //         "spotify": "",
+    //         "mpd": "󰝚"
+    //     }
+    // },
+    "tlp": {
+       "format": "{mode}",
+       "interval": 10,
+       "exec": "tlp-stat -s | grep 'Mode:' | awk '{print $3}'",
+       "on-click": "sudo tlp bat && notify-send '🔋 Power mode → BATTERY (TLP)'",
+       "on-click-right": "sudo tlp ac && notify-send '⚡ Power mode → PERFORMANCE (TLP)'"
+    },
+    "hyprland/workspaces": {
+       "format": "{icon}",
+       "on-click": "activate",
+       "format-icons": {
+          "1": "",
+          "2": "",
+          "3": "",
+          "4": "",
+          "5": "",
+          "urgent": "",
+          "active": "",
+          "default": ""
+       },
+       "sort-by-number": true
+    },
+    // "mpd": {
+    //     "format": "{title}",
+    //     "format-paused": " {title}",
+    //     "format-playing": " {title}",
+    //     "format-stopped": " stopped",
+    //     "max-length": 30,
+    //     "consume-icons": ["󰛄"],   
+    //     "repeat-icons": ["󰑖"],     
+    //     "random-icons": ["󰒟"],
+    //     "on-click": "mpc toggle",
+    //     "on-scroll-up": "mpc next",
+    //     "on-scroll-down": "mpc prev"
+    // },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        "icon-size": 20,
+        "spacing": 10 //,
+        // "icons": {
+        //   "blueman": "bluetooth",
+        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+        // }
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "network": {
+        "format-wifi": "  {essid}",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "󰁿",
+        "on-click": "networkmanager_dmenu"
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "",
+        "performance": "",
+        "balanced": "",
+        "power-saver": ""
+      }
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    }
+}
