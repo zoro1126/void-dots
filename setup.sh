@@ -14,10 +14,6 @@ REQUIRED_PACKAGES=(
     pipewire wireplumber wl-clipboard networkmanager-dmenu
 )
 
-OPTIONAL_PACKAGES=(
-    ncspot cava
-)
-
 # --- Install required packages ---
 echo "📦 Installing required packages..."
 sudo pacman -S --needed --noconfirm "${REQUIRED_PACKAGES[@]}"
@@ -52,5 +48,3 @@ echo "    chsh -s /usr/bin/fish"
 echo "✨ Setup complete!"
 echo "👉 Restart Hyprland or run: hyprctl reload"
 echo "👉 Open a new Kitty window to test Fish & Fastfetch"
-echo "👉 For full functionality, also install optional packages:"
-echo "    yay -S ${OPTIONAL_PACKAGES[*]}"
