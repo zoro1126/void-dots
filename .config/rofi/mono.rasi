@@ -1,0 +1,169 @@
+/**
+ * ROFI Color theme
+ * Modified for Monochrome/Blur/Cyan-Tint
+ */
+
+* {
+    /* --- Configuration --- */
+    /* Light Cyan (Very close to white) for the Heading */
+    heading-color:      #e0ffff;
+    
+    /* Standard Text (White/Gray) */
+    text-color-normal:  #dddddd;
+    text-color-dim:     #888888;
+    
+    /* Backgrounds (Black with Alpha for Blur) */
+    /* The last two digits '66' control transparency (00-FF) */
+    bg-window:          #00000066; 
+    bg-input:           #00000044;
+    bg-list:            #00000000;
+    
+    /* Selection Colors (High Contrast B&W) */
+    selected-bg:        #b6b6b6ff;
+    selected-fg:        #000000;
+
+    /* Global Settings */
+    background-color:   transparent;
+    font:               "JetBrainsMono Nerd Font 10";
+}
+
+window {
+    location:           center;
+    anchor:             center;
+    transparency:       "real";
+    padding:            0px;
+    border:             1px;
+    border-radius:      8px;
+    
+    /* This creates the semi-transparent layer for the blur to work on */
+    background-color:   @bg-window;
+    
+    spacing:            0;
+    children:           [ mainbox ];
+    orientation:        horizontal;
+}
+
+mainbox {
+    spacing:            0;
+    children:           [ inputbar, message, listview ];
+}
+
+/* --- Input Bar (The Heading) --- */
+inputbar {
+    /* The Light Cyan Color */
+    text-color:         @heading-color;
+    
+    padding:            11px;
+    background-color:   @bg-input;
+    border:             2px 2px 1px 2px;
+    border-radius:      8px 8px 0px 0px;
+    border-color:       @heading-color; /* Cyan border for the input */
+    font:               "JetBrainsMono Nerd Font 18";
+    children:           [ entry ];
+}
+
+/*prompt {
+    margin:             0px 0.3em 0em 0em;
+    text-color:         @heading-color;
+}*/
+
+entry {
+    text-color:         @heading-color;
+    placeholder:        "Search...";
+    placeholder-color:  @text-color-dim;
+}
+
+/* --- List View --- */
+listview {
+    padding:            8px;
+    border-radius:      0px 0px 8px 8px;
+    border-color:       @heading-color;
+    border:             0px 2px 2px 2px;
+    background-color:   @bg-list;
+    dynamic:            false;
+    lines:              10;
+}
+
+element {
+    padding:            3px;
+    vertical-align:     0.5;
+    border-radius:      4px;
+    background-color:   transparent;
+    color:              @text-color-normal;
+    font:               inherit;
+}
+
+element-text {
+    background-color:   inherit;
+    text-color:         inherit;
+}
+
+/* --- Element States --- */
+
+/* Normal Item */
+element normal.normal {
+    text-color: @text-color-normal;
+}
+element alternate.normal {
+    text-color: @text-color-normal;
+}
+
+/* Selected Item (High Contrast Black & White) */
+element selected.normal {
+    background-color:   @selected-bg;
+    text-color:         @selected-fg;
+}
+element selected.active {
+    background-color:   @heading-color;
+    text-color:         @selected-fg;
+}
+
+/* Active/Urgent (Modified to fit Monochrome theme) */
+element normal.active {
+    text-color: @heading-color;
+}
+element normal.urgent {
+    text-color: #ff5555; /* Kept red just for errors/urgency */
+}
+element alternate.active {
+    text-color: @heading-color;
+}
+element alternate.urgent {
+    text-color: #ff5555;
+}
+
+/* --- Message Box --- */
+message {
+    border-color:       @heading-color;
+    border:             0px 2px 2px 2px;
+    padding:            5;
+    background-color:   @bg-input;
+    font:               "Source Code Pro 8";
+    color:              @text-color-normal;
+}
+
+/* --- Mode Switcher (If used) --- */
+button {
+    padding:            6px;
+    border:             2px 0px 2px 2px;
+    border-radius:      4px 0px 0px 4px;
+    background-color:   @bg-input;
+    border-color:       @heading-color;
+    color:              @text-color-normal;
+    horizontal-align:   0.5;
+}
+button selected normal {
+    color:              @selected-fg;
+    border:             2px 0px 2px 2px;
+    background-color:   @selected-bg;
+    border-color:       @heading-color;
+}
+
+error-message {
+    expand:             true;
+    background-color:   #000000aa;
+    border-color:       #ff5555;
+    border:             2px;
+    padding:            1em;
+    text-color:         #ffffff;
+}
