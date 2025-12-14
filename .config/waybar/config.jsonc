@@ -9,7 +9,8 @@
 
     // Choose the order of the modules
     "modules-left": [
-        "hyprland/workspaces",
+        "idle_inhibitor",
+        "clock",
         "tlp",
         "cpu",
         "memory",
@@ -17,8 +18,8 @@
         // "playerctl"
     ],
     "modules-center": [
-        "idle_inhibitor",
-        "clock"
+        "hyprland/workspaces",
+        "hyprland/window",
     ],
     "modules-right": [
         "tray",
@@ -46,32 +47,39 @@
        "on-click": "sudo tlp bat && notify-send '🔋 Power mode → BATTERY (TLP)'",
        "on-click-right": "sudo tlp ac && notify-send '⚡ Power mode → PERFORMANCE (TLP)'"
     },
+
+    // "hyprland/workspaces": {
+    //     "format": "{name}",
+    //     "on-click": "activate",
+    //     "sort-by-number": true,
+    //     "persistent-workspaces": {
+    //     "*": 5
+    //     }
+    // },
+
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 40,
+        "separate-outputs": true
+    },
+
     "hyprland/workspaces": {
         "format": "{name} {windows}",
         "format-window-separator": "",
-        "window-rewrite-default": "",
+        "window-rewrite-default": " ",
         "window-rewrite": {
-            "title<.*youtube.*>": "", // Windows whose titles contain "youtube"
-            "title<.spotify.*>": "󰓇",
-            "class<firefox>": "", // Windows whose classes are "firefox"
-            "class<firefox> title<.*github.*>": "", // Windows whose class is "firefox" and title contains "github". Note that "class" always comes first.
-            "kitty": "", // Windows that contain "foot" in either class or title. For optimization reasons, it will only match against a title if at least one other window explicitly matches against a title.
+            "title<.*youtube.*>": " ", // Windows whose titles contain "youtube"
+            "title<.spotify.*>": "󰓇 ",
+            "class<firefox>": " ", // Windows whose classes are "firefox"
+            "class<firefox> title<.*github.*>": " ", // Windows whose class is "firefox" and title contains "github". Note that "class" always comes first.
+            "kitty": " ", // Windows that contain "foot" in either class or title. For optimization reasons, it will only match against a title if at least one other window explicitly matches against a title.
             "code": "󰨞 ",
-            "discord": "",
-            "obsidian": "",
+            "discord": " ",
+            "obsidian": " ",
             "title<.* - (.*) - VSCodium>": "codium $1"  // captures part of the window title and formats it into output
         }
     },
 
-    // "hyprland/workspaces": {
-    //    "format": "{name}",
-    //    "on-click": "activate",
-    //    "persistent-workspaces": {
-	// 	    "*": 5, // 5 workspaces by default on every monitor
-	// 	    "HDMI-A-1": 3 // but only three on HDMI-A-1
-	//     },
-    //    "sort-by-number": true
-    // },
     // "mpd": {
     //     "format": "{title}",
     //     "format-paused": " {title}",

@@ -158,6 +158,15 @@ button:hover {
     background-color: #000000;
 }
 
+#window {
+    border: 1px solid #ffffff;
+    margin: 0 4px;
+    padding: 0 10px;
+    border-radius: 50px;
+    color: #ffffff;
+    background-color: #000000;
+}
+
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
     margin-left: 0;
