@@ -9,7 +9,7 @@ REPO_CONFIG_DIR="$(pwd)/.config"
 
 REQUIRED_PACKAGES=(
     hyprland waybar kitty fish starship fastfetch rofi-wayland
-    pipewire wireplumber wl-clipboard networkmanager-dmenu
+    pipewire wireplumber wl-clipboard networkmanager-dmenu yazi
 )
 
 echo "Installing required packages..."
@@ -18,7 +18,7 @@ sudo pacman -S --needed --noconfirm "${REQUIRED_PACKAGES[@]}"
 echo "Copying configs to $CONFIG_DIR..."
 mkdir -p "$CONFIG_DIR"
 
-for dir in hypr waybar kitty fish fastfetch rofi; do
+for dir in hypr waybar kitty fish fastfetch rofi yazi; do
     if [ -d "$REPO_CONFIG_DIR/$dir" ]; then
         rm -rf "$CONFIG_DIR/$dir"
         cp -r "$REPO_CONFIG_DIR/$dir" "$CONFIG_DIR/"
