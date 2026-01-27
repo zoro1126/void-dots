@@ -1,0 +1,12 @@
+# Open PDFs with Firefox
+[[opener.firefox]]
+run = "firefox %s"
+orphan = true
+desc = "Open with firefox"
+
+# Open images with Gwenview
+[[opener.gwenview]]
+run = "gwenview %s"
+orphan = true
+desc = "Open with gwenview"
+
