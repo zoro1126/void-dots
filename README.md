@@ -20,7 +20,7 @@ hyprctl reload
 ## Required Packages
 Install these on Arch (recommended):
 ```bash
-sudo pacman -S hyprland waybar kitty fish starship fastfetch rofi \
+sudo pacman -S hyprland waybar kitty rofi yazi fish starship fastfetch rofi \
 pipewire wireplumber wl-clipboard networkmanager-dmenu
 ```
 ---
@@ -32,6 +32,8 @@ pipewire wireplumber wl-clipboard networkmanager-dmenu
 ├── hypr/             # Hyprland config
 ├── kitty/            # Terminal config (B&W theme)
 ├── starship.toml     # Shell prompt
+├── rofi/             # custom menu
+├── yazi/             # TUI file browser
 └── waybar/           # Bar config + styling
 ```
 Everything else is stripped out for a clean rice.
@@ -47,6 +49,8 @@ Everything else is stripped out for a clean rice.
 | Fish      | Custom fetch on startup                     |
 | Waybar    | Lightweight bar                             |
 | Fastfetch | Random ASCII or image logo                  |
+| Yazi      | A TUI file browser                          |  
+| Rofi      | A GUI menu used for Desktop overview, apps  |
 | Starship  | Clean prompt                                |
 
 Only what’s needed. Nothing else.
@@ -71,8 +75,8 @@ Probably ricing instead of doing something “productive” (Uses arch btw)
 ## Setup Script
 A `setup.sh` script is included in the repo to:
 - Copy configs to `~/.config`
-- Install dependencies
-- Set permissions
+- Install dependencies (or let the script do it)
+- Set permissions : `sudo chmod +x setup.sh`
 Run it after cloning.
 ---
 ## Happy ricing.
