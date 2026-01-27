@@ -3,12 +3,20 @@ format = """
 $directory\
 $git_branch\
 $git_status\
+$python\
 $nodejs\
 $rust\
 $golang\
 $php\
 $time\
 $character"""
+
+[python]
+# This format displays the symbol (🐍), the version, and the virtual environment name in parentheses
+format = '[$symbol$version(\(venv: $virtualenv\))]($style) '
+symbol = ' '
+style = 'bold blue'
+# disable = false # The module is enabled by default if conditions are met
 
 [directory]
 style = "fg:#FFFFFF"

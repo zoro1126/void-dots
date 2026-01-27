@@ -8,7 +8,7 @@ CONFIG_DIR="$HOME/.config"
 REPO_CONFIG_DIR="$(pwd)/.config"
 
 REQUIRED_PACKAGES=(
-    hyprland waybar kitty fish starship fastfetch rofi
+    hyprland waybar kitty fish starship fastfetch rofi-wayland
     pipewire wireplumber wl-clipboard networkmanager-dmenu
 )
 
@@ -18,7 +18,7 @@ sudo pacman -S --needed --noconfirm "${REQUIRED_PACKAGES[@]}"
 echo "Copying configs to $CONFIG_DIR..."
 mkdir -p "$CONFIG_DIR"
 
-for dir in hypr waybar kitty fish fastfetch; do
+for dir in hypr waybar kitty fish fastfetch rofi; do
     if [ -d "$REPO_CONFIG_DIR/$dir" ]; then
         rm -rf "$CONFIG_DIR/$dir"
         cp -r "$REPO_CONFIG_DIR/$dir" "$CONFIG_DIR/"
@@ -40,7 +40,7 @@ BASH_PROFILE="$HOME/.bash_profile"
 cat > "$BASH_PROFILE" << 'EOF'
 # Auto login Hyprland only on tty1
 if [ -z "$DESKTOP_SESSION" ] && [ "$XDG_VTNR" = "1" ] && [ -z "$SSH_TTY" ]; then
-    exec Hyprland
+    exec hyprland-start
 fi
 EOF
 
