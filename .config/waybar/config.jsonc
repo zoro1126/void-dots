@@ -1,174 +1,89 @@
-// -*- mode: jsonc -*-
+// ───────────────────────────────────────────────────────────────────
+//  「✦ WAYBAR CONFIG ✦ 」
+// ───────────────────────────────────────────────────────────────────
+
+// ── BAR SETTINGS ───────────────────────────────────────────────────
 {
-    // "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 25, // Waybar height (to be removed for auto height)
-    "width": 1350, // Waybar width
-    "spacing": 4, // Gaps between modules (4px)
-    "margin-top": 10,
+  "layer": "top",
+  "exclusive": true,
+  "position": "top",
+  "margin-top": 10,
+  "reload_style_on_change": true,
 
-    // Choose the order of the modules
-    "modules-left": [
-        "idle_inhibitor",
-        "clock",
-        "tlp",
-        "cpu",
-        "memory",
-        "battery"
-        // "playerctl"
-    ],
-    "modules-center": [
-        "hyprland/workspaces",
-        "hyprland/window",
-    ],
-    "modules-right": [
-        "tray",
-        "network",
-        "pulseaudio"
-    ],
-    // Modules configuration
-    // "playerctl": {
-    //     "player": "firefox",
-    //     "format": " {artist} - {title}",
-    //     "on-click": "playerctl --player=firefox play-pause",
-    //     "on-scroll-up": "playerctl --player=firefox next",
-    //     "on-scroll-down": "playerctl --player=firefox previous",
-    //     "player_icons": {
-    //         "default": "",
-    //         "firefox": "",
-    //         "spotify": "",
-    //         "mpd": "󰝚"
-    //     }
-    // },
-    "tlp": {
-       "format": "{mode}",
-       "interval": 10,
-       "exec": "tlp-stat -s | grep 'Mode:' | awk '{print $3}'",
-       "on-click": "sudo tlp bat && notify-send '🔋 Power mode → BATTERY (TLP)'",
-       "on-click-right": "sudo tlp ac && notify-send '⚡ Power mode → PERFORMANCE (TLP)'"
-    },
+// ── MODULES ────────────────────────────────────────────────────────
+  "modules-center": [
+    "hyprland/workspaces",
+    "clock",
+    "custom/pomo",
+    "pulseaudio",
+    "battery",
+    "network",
+    "tray"
+  ],
 
-    // "hyprland/workspaces": {
-    //     "format": "{name}",
-    //     "on-click": "activate",
-    //     "sort-by-number": true,
-    //     "persistent-workspaces": {
-    //     "*": 5
-    //     }
-    // },
-
-    "hyprland/window": {
-        "format": "{}",
-        "max-length": 40,
-        "separate-outputs": true
+// ── WORKSPACES ─────────────────────────────────────────────────────
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "active": "",
+      "default": "",
+      "empty": ""
     },
-
-    "hyprland/workspaces": {
-        "format": "{name} {windows}",
-        "format-window-separator": "",
-        "window-rewrite-default": " ",
-        "window-rewrite": {
-            "title<.*youtube.*>": " ", // Windows whose titles contain "youtube"
-            "title<.spotify.*>": "󰓇 ",
-            "class<firefox>": " ", // Windows whose classes are "firefox"
-            "class<firefox> title<.*github.*>": " ", // Windows whose class is "firefox" and title contains "github". Note that "class" always comes first.
-            "kitty": " ", // Windows that contain "foot" in either class or title. For optimization reasons, it will only match against a title if at least one other window explicitly matches against a title.
-            "code": "󰨞 ",
-            "discord": " ",
-            "obsidian": " ",
-            "title<.* - (.*) - VSCodium>": "codium $1"  // captures part of the window title and formats it into output
-        }
-    },
-
-    // "mpd": {
-    //     "format": "{title}",
-    //     "format-paused": " {title}",
-    //     "format-playing": " {title}",
-    //     "format-stopped": " stopped",
-    //     "max-length": 30,
-    //     "consume-icons": ["󰛄"],   
-    //     "repeat-icons": ["󰑖"],     
-    //     "random-icons": ["󰒟"],
-    //     "on-click": "mpc toggle",
-    //     "on-scroll-up": "mpc next",
-    //     "on-scroll-down": "mpc prev"
-    // },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
-    "tray": {
-        "icon-size": 20,
-        "spacing": 10 //,
-        // "icons": {
-        //   "blueman": "bluetooth",
-        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
-        // }
-    },
-    "clock": {
-        // "timezone": "America/New_York",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
-    },
-    "cpu": {
-        "format": "{usage}% ",
-        "tooltip": false
-    },
-    "memory": {
-        "format": "{}% "
-    },
-    "network": {
-        "format-wifi": "  {essid}",
-        "format-ethernet": "󰈀",
-        "format-disconnected": "󰁿",
-        "on-click": "networkmanager_dmenu"
-    },
-    "battery": {
-        "states": {
-            // "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
-    },
-    "power-profiles-daemon": {
-      "format": "{icon}",
-      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-      "tooltip": true,
-      "format-icons": {
-        "default": "",
-        "performance": "",
-        "balanced": "",
-        "power-saver": ""
-      }
-    },
-    "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
+    "persistent-workspaces": {
+      "*": [1,2,3,4,5]
     }
+  },
+
+// ── CLOCK ──────────────────────────────────────────────────────────
+  "clock": {
+    "format": "{:%I:%M %p}",
+    "format-alt": "{:%a, %d %b}",
+    "tooltip": false
+  },
+
+// ── NETWORK ──────────────────────────────────────────────────────────
+  "network": {
+      "format-wifi": "  {essid}",
+      "format-ethernet": "󰈀",
+      "format-disconnected": "󰁿",
+      "on-click": "networkmanager_dmenu"
+  },
+
+// ── AUDIO ──────────────────────────────────────────────────────────
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-muted": "󰝟",
+    "format-icons": {
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol",
+    "tooltip": false
+  },
+
+// ── BATTERY ────────────────────────────────────────────────────────
+  "battery": {
+    "states": {
+        "warning": 30,
+        "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-icons": ["󰂃","󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂"],
+    "tooltip": false
+  },
+
+// ── POMODORO ───────────────────────────────────────────────────────
+  "custom/pomo": {
+    "exec": "~/.config/waybar/scripts/pomo.sh",
+    "on-click": "~/.config/waybar/scripts/pomo.sh toggle",
+    "interval": 1,
+    "return-type": "json",
+    "format": " {}"
+  },
+
+// ── TRAY ───────────────────────────────────────────────────────────
+  "tray": {
+    "spacing": 10,
+    "tooltip": false
+  }
 }
